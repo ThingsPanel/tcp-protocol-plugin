@@ -1,0 +1,30 @@
+default:
+  custom_tcp_protocol_addr: "localhost:7654"
+  tcp_protocol_addr: "localhost:7653"
+  mqtt:
+    addr: "localhost:1883"
+    username: "user"
+    password: "password"
+    qos: 0
+    retain: false
+  topic:
+    subscribe: "topic"
+    publish_raw_data: "device/attributes"
+    subscribe_raw_data: "plugin/tcp/#"
+  api:
+    custom_addr: "localhost:8088"
+    self_addr: "localhost:8089"
+
+production:
+  custom_tcp_protocol_addr: "example.com:7654"
+  tcp_protocol_addr: "example.com:7653"
+  mqtt:
+    addr: "example.com:1883"
+    username: "user"
+    password: "password"
+    qos: 0
+    retain: false
+  topic:
+    subscribe: "topic"
+    publish_raw_data: "device/attributes"
+    subscribe_raw_data: "plugin/tcp/#"
