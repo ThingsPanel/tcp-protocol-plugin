@@ -73,6 +73,7 @@ func (c *MqttClient) Subscribe() {
 		err := json.Unmarshal(msg.Payload(), &receiveData)
 		if err != nil {
 			log.Error(err)
+			return
 		}
 		device := Devices[deviceToken]
 		log.Info(device)
