@@ -53,8 +53,8 @@ func handleConnection(conn net.Conn) {
 				device = &model.Device{
 					AccessToken: string(payload),
 					ConnectType: "self",
-					ClientConn:  conn,
-					ConnConfig:  nil,
+					//ClientConn:  conn,
+					ConnConfig: nil,
 				}
 				err = device.Auth(global.Config.Mqtt.Addr)
 				if err != nil {

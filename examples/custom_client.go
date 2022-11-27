@@ -27,11 +27,13 @@ func main() {
 				break
 			}
 
-			buf := make([]byte, 10)
-			n, _ := conn.Read(buf)
-			if string(buf[:n]) == "ok" {
-				isAuthed = true
-			}
+			//buf := make([]byte, 10)
+			//n, _ := conn.Read(buf)
+			//if string(buf[:n]) == "ok" {
+			//	isAuthed = true
+			//}
+			isAuthed = true
+			time.Sleep(time.Millisecond * 200)
 			continue
 		}
 
@@ -42,9 +44,9 @@ func main() {
 			fmt.Println(err)
 			break
 		}
-		buf := make([]byte, 100)
-		n, _ := conn.Read(buf)
-		fmt.Println(string(buf[:n]))
+		//buf := make([]byte, 100)
+		//n, _ := conn.Read(buf)
+		//fmt.Println(string(buf[:n]))
 
 		time.Sleep(time.Second * 2)
 	}

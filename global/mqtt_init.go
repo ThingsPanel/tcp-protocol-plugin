@@ -78,7 +78,7 @@ func (c *MqttClient) Subscribe() {
 		device := Devices[deviceToken]
 		log.Info(device)
 		if device != nil && device.Online == true {
-			device.ClientConn.Write([]byte(receiveData["values"]))
+			device.ClientConn.Socket.Write([]byte(receiveData["values"]))
 		}
 	})
 }
