@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	conn, err := net.Dial("tcp", ":8080")
+	conn, err := net.Dial("tcp", ":7653")
 	if err != nil {
 		panic(err)
 	}
@@ -44,6 +44,8 @@ func main() {
 				break
 			}
 			isAuthed = true
+			time.Sleep(time.Millisecond * 200)
+			continue
 		}
 
 		publish := "{\"light\": 98, \"humidity\": 30.0}"

@@ -7,6 +7,7 @@ require (
 	github.com/gin-gonic/gin v1.8.1
 	github.com/panjf2000/ants/v2 v2.6.0
 	github.com/sirupsen/logrus v1.9.0
+	github.com/sllt/ergo v1.1.220
 	gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b
 )
 

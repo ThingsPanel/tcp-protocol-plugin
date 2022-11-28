@@ -2,8 +2,8 @@ package model
 
 import (
 	mqtt "github.com/eclipse/paho.mqtt.golang"
+	"github.com/sllt/ergo/gen"
 	mqttClient "github.com/sllt/tp-tcp-plugin/pkg/mqtt/client"
-	"net"
 )
 
 type Device struct {
@@ -11,7 +11,7 @@ type Device struct {
 	Online      bool
 	ConnectType string
 	Conn        mqtt.Client
-	ClientConn  net.Conn
+	ClientConn  *gen.TCPConnection
 	ConnConfig  *DeviceConnConfig
 }
 

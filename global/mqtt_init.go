@@ -73,11 +73,12 @@ func (c *MqttClient) Subscribe() {
 		err := json.Unmarshal(msg.Payload(), &receiveData)
 		if err != nil {
 			log.Error(err)
+			return
 		}
 		device := Devices[deviceToken]
 		log.Info(device)
 		if device != nil && device.Online == true {
-			device.ClientConn.Write([]byte(receiveData["values"]))
+			device.ClientConn.Socket.Write([]byte(receiveData["values"]))
 		}
 	})
 }
