@@ -9,37 +9,37 @@ import (
 	"github.com/sllt/ergo/node"
 )
 
-type rawApp struct {
+type tcpApp struct {
 	gen.Application
 }
 
-func (ra *rawApp) Load(args ...etf.Term) (gen.ApplicationSpec, error) {
+func (ta *tcpApp) Load(args ...etf.Term) (gen.ApplicationSpec, error) {
 	return gen.ApplicationSpec{
-		Name:        "rawTCPApp",
-		Description: "Raw TCP APP",
+		Name:        "tcpApp",
+		Description: "ThingsPanel Common TCP APP",
 		Version:     "v.1.0",
 		Children: []gen.ApplicationChildSpec{
 			{
-				Child: &rawServer{},
+				Child: &tcpServer{},
 				Name:  "raw",
 			},
 		},
 	}, nil
 }
 
-func (ra *rawApp) Start(process gen.Process, args ...etf.Term) {
-	fmt.Println("Raw TCP Application started!")
+func (ta *tcpApp) Start(process gen.Process, args ...etf.Term) {
+	fmt.Println("Common TCP Application started!")
 }
 
-func StartRawServer() {
+func StartTcpServer() {
 	opts := node.Options{
 		Applications: []gen.ApplicationBehavior{
-			&rawApp{},
+			&tcpApp{},
 		},
 	}
 
-	log.Info("started raw tcp server...")
-	rawNode, err := ergo.StartNode("raw@127.0.0.1", "secret", opts)
+	log.Info("started tcp server...")
+	tcpNode, err := ergo.StartNode("tcp@127.0.0.1", "secret", opts)
 	if err != nil {
 		panic(err)
 	}
@@ -48,5 +48,5 @@ func StartRawServer() {
 		return
 	}
 
-	rawNode.Wait()
+	tcpNode.Wait()
 }

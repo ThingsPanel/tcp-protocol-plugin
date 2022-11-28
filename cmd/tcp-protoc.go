@@ -26,5 +26,5 @@ func main() {
 	go api.NewSelfApiServer(global.Config.Api.SelfAddr).Start()
 	// started tcp server
 	go plugin.StartRawServer()
-	plugin.Start(global.Config.TcpProtocolAddr)
+	plugin.StartTcpServer()
 }
