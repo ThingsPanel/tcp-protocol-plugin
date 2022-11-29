@@ -38,7 +38,7 @@ func (c *MqttClient) Init() error {
 	return nil
 }
 
-func (c *MqttClient) SendRawData(accessToken string, data []byte) error {
+func (c *MqttClient) SendRawData(deviceType, accessToken string, data []byte) error {
 	sendData := &rawData{
 		Token:  accessToken,
 		Values: data,
@@ -47,9 +47,15 @@ func (c *MqttClient) SendRawData(accessToken string, data []byte) error {
 	if err != nil {
 		return err
 	}
+	var topic string
+	if deviceType == "1" {
+		topic = Config.Topic.PublishRawData
+	} else {
+		topic = Config.Topic.GatewayPublishRawData
+	}
 	log.Info("send data:", string(d))
-	log.Info("topic", Config.Topic.PublishRawData)
-	if token := c.Client.Publish(Config.Topic.PublishRawData, byte(Config.Mqtt.Qos), false, d); token.Wait() && token.Error() != nil {
+	log.Info("topic:", topic)
+	if token := c.Client.Publish(topic, byte(Config.Mqtt.Qos), false, d); token.Wait() && token.Error() != nil {
 		log.Info(token.Error())
 		return err
 	}
@@ -69,16 +75,11 @@ func (c *MqttClient) Subscribe() {
 		deviceToken := topicArr[2]
 
 		log.Info("deviceToken:", deviceToken)
-		receiveData := make(map[string]string)
-		err := json.Unmarshal(msg.Payload(), &receiveData)
-		if err != nil {
-			log.Error(err)
-			return
-		}
+
 		device := Devices[deviceToken]
 		log.Info(device)
 		if device != nil && device.Online == true {
-			device.ClientConn.Socket.Write([]byte(receiveData["values"]))
+			device.ClientConn.Socket.Write(msg.Payload())
 		}
 	})
 }

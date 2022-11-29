@@ -19,9 +19,10 @@ type Config struct {
 		Retain   bool   `yaml:"retain"`
 	} `yaml:"mqtt"`
 	Topic struct {
-		Subscribe        string `yaml:"subscribe"`
-		SubscribeRawData string `yaml:"subscribe_raw_data"`
-		PublishRawData   string `yaml:"publish_raw_data"`
+		Subscribe             string `yaml:"subscribe"`
+		SubscribeRawData      string `yaml:"subscribe_raw_data"`
+		PublishRawData        string `yaml:"publish_raw_data"`
+		GatewayPublishRawData string `yaml:"gateway_publish_raw_data"`
 	} `yaml:"topic"`
 	Api struct {
 		CustomAddr string `yaml:"custom_addr"`
