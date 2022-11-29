@@ -12,7 +12,7 @@ type apiServer struct {
 
 func NewCustomServer(addr string) *apiServer {
 	e := gin.Default()
-	e.POST("/api/form/config", CustomGetFormConfig)
+	e.GET("/api/form/config", CustomGetFormConfig)
 	e.POST("/api/device/config/update", CustomDeviceConfigUpdate)
 	e.POST("/api/device/config/add", CustomDeviceConfigCreate)
 	e.POST("/api/device/config/delete", CustomDeviceConfigDelete)
@@ -24,7 +24,7 @@ func NewCustomServer(addr string) *apiServer {
 
 func NewSelfApiServer(addr string) *apiServer {
 	e := gin.Default()
-	e.POST("/api/form/config", SelfGetFormConfig)
+	e.GET("/api/form/config", SelfGetFormConfig)
 	e.POST("/api/device/config/update", SelfDeviceConfigUpdate)
 	e.POST("/api/device/config/add", SelfDeviceConfigCreate)
 	e.POST("/api/device/config/delete", SelfDeviceConfigDelete)

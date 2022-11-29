@@ -24,15 +24,16 @@ func (th *rawTCPHandler) HandleDisconnect(process *gen.TCPHandlerProcess, conn *
 }
 
 func (th *rawTCPHandler) HandlePacket(process *gen.TCPHandlerProcess, packet []byte, conn *gen.TCPConnection) (int, int, gen.TCPHandlerStatus) {
-	log.Info(th.onlineDevice)
 	if th.onlineDevice[conn.Addr.String()] == nil {
 		info, err := rpc.GetDeviceBufferConfig(string(packet))
 		if err != nil {
+			conn.Socket.Write([]byte("register failed"))
 			return 0, 0, gen.TCPHandlerStatusClose
 		}
 		device := &model.Device{
 			AccessToken: info.Token,
 			ConnectType: "custom",
+			DeviceType:  info.DeviceType,
 			ClientConn:  conn,
 			ConnConfig:  info,
 			Online:      true,
@@ -45,7 +46,7 @@ func (th *rawTCPHandler) HandlePacket(process *gen.TCPHandlerProcess, packet []b
 
 	device := th.onlineDevice[conn.Addr.String()]
 
-	err := global.DefaultMqttClient.SendRawData(device.AccessToken, packet)
+	err := global.DefaultMqttClient.SendRawData(device.DeviceType, device.AccessToken, packet)
 	if err != nil {
 		conn.Socket.Write([]byte("error"))
 	}

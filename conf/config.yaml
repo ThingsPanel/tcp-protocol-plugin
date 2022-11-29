@@ -1,6 +1,6 @@
 default:
-  custom_tcp_protocol_addr: "localhost:7654"
-  tcp_protocol_addr: "localhost:7653"
+  custom_tcp_protocol_addr: ":7654"
+  tcp_protocol_addr: ":7653"
   mqtt:
     addr: "localhost:1883"
     username: "user"
@@ -11,8 +11,9 @@ default:
     subscribe: "topic"
     publish_raw_data: "device/attributes"
     subscribe_raw_data: "plugin/tcp/#"
+    gateway_publish_raw_data: "gateway/attributes"
   api:
-    custom_addr: "localhost:8088"
+    custom_addr: "0.0.0.0:8000"
     self_addr: "localhost:8089"
 
 production:

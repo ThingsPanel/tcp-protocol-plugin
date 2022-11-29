@@ -9,6 +9,7 @@ import (
 type Device struct {
 	AccessToken string
 	Online      bool
+	DeviceType  string
 	ConnectType string
 	Conn        mqtt.Client
 	ClientConn  *gen.TCPConnection
@@ -17,6 +18,7 @@ type Device struct {
 
 type DeviceConnConfig struct {
 	Token              string
+	DeviceType         string
 	InBoundByteLength  int `json:"in_bound_byte_length"`
 	OutBoundByteLength int `json:"out_bound_byte_length"`
 }
