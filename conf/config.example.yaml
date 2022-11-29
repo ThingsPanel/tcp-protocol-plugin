@@ -2,9 +2,9 @@ default:
   custom_tcp_protocol_addr: ":7654"
   tcp_protocol_addr: ":7653"
   mqtt:
-    addr: "localhost:1883"
-    username: "user"
-    password: "password"
+    addr: "dev.thingspanel.cn:1883"
+    username: "root"
+    password: "root"
     qos: 0
     retain: false
   topic:

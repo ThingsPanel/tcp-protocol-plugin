@@ -13,3 +13,4 @@ go.work
 tcp-protoc
 main
 
+conf/config.yaml

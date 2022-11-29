@@ -29,11 +29,23 @@ func GetDeviceBufferConfig(accessToken string) (*model.DeviceConnConfig, error) 
 	if result.Data != nil && result.Data.AccessToken == "" {
 		return nil, errors.New("device not found")
 	} else if result.Data != nil && result.Data.DeviceConfig != nil {
-		return &model.DeviceConnConfig{
-			DeviceType:         result.Data.DeviceType,
-			InBoundByteLength:  result.Data.DeviceConfig.InBoundByteLength,
-			OutBoundByteLength: result.Data.DeviceConfig.OutBoundByteLength,
-		}, nil
+		if result.Data.DeviceConfig.InBoundByteLength != 0 {
+			return &model.DeviceConnConfig{
+				Token:              result.Data.AccessToken,
+				DeviceType:         result.Data.DeviceType,
+				InBoundByteLength:  result.Data.DeviceConfig.InBoundByteLength,
+				OutBoundByteLength: result.Data.DeviceConfig.OutBoundByteLength,
+			}, nil
+		} else {
+			// the server return an empty config
+			// use default config
+			return &model.DeviceConnConfig{
+				Token:              accessToken,
+				DeviceType:         result.Data.DeviceType,
+				InBoundByteLength:  1,
+				OutBoundByteLength: 1,
+			}, nil
+		}
 	} else {
 		// return default value
 		return &model.DeviceConnConfig{
