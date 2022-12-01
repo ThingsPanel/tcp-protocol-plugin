@@ -24,7 +24,7 @@ var (
 func (c *MqttClient) Init() error {
 	opts := mqtt.NewClientOptions().
 		AddBroker(Config.Mqtt.Addr).
-		SetClientID("custom-tcp-plugin").
+		//SetClientID("custom-tcp-plugin").
 		SetUsername(Config.Mqtt.Username).
 		SetPassword(Config.Mqtt.Password).
 		SetAutoReconnect(true)

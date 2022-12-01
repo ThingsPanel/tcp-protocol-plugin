@@ -1,26 +1,28 @@
 {
-  "config": [
-    {
-      "type": "input",
-      "dataKey": "inbound_buffer_size",
-      "label": "上行缓冲区大小（单位为KB)",
-      "placeholder": "上行缓冲区大小（单位为KB)",
-      "validate": {
-        "type": "number",
-        "required": true,
-        "message": "缓冲区大小不能为空"
+  "data": {
+    "config": [
+      {
+        "type": "input",
+        "dataKey": "inbound_buffer_size",
+        "label": "上行缓冲区大小（单位为KB)",
+        "placeholder": "上行缓冲区大小（单位为KB)",
+        "validate": {
+          "type": "number",
+          "required": true,
+          "message": "缓冲区大小不能为空"
+        }
+      },
+      {
+        "type": "input",
+        "dataKey": "outbound_buffer_size",
+        "label": "下行缓冲区大小（单位为KB)",
+        "placeholder": "上行缓冲区大小（单位为KB)",
+        "validate": {
+          "type": "number",
+          "required": true,
+          "message": "缓冲区大小不能为空"
+        }
       }
-    },
-    {
-      "type": "input",
-      "dataKey": "outbound_buffer_size",
-      "label": "下行缓冲区大小（单位为KB)",
-      "placeholder": "上行缓冲区大小（单位为KB)",
-      "validate": {
-        "type": "number",
-        "required": true,
-        "message": "缓冲区大小不能为空"
-      }
-    }
-  ]
+    ]
+  }
 }

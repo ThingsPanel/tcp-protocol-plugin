@@ -1,7 +1,6 @@
 package client
 
 import (
-	"fmt"
 	mqtt "github.com/eclipse/paho.mqtt.golang"
 )
 
@@ -12,7 +11,7 @@ var (
 func NewMQTTClient(server, username string) mqtt.Client {
 	opts := mqtt.NewClientOptions().
 		AddBroker(server).
-		SetClientID(fmt.Sprintf("tcp-plugin-%s", username)).
+		//SetClientID(fmt.Sprintf("tcp-plugin-%s", username)).
 		SetUsername(username).
 		SetAutoReconnect(true)
 	client := mqtt.NewClient(opts)

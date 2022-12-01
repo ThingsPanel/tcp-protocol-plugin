@@ -5,6 +5,7 @@ import (
 	"github.com/sllt/ergo/gen"
 	"github.com/sllt/tp-tcp-plugin/global"
 	"github.com/sllt/tp-tcp-plugin/model"
+	"github.com/sllt/tp-tcp-plugin/pkg/rpc"
 )
 
 type tcpHandler struct {
@@ -55,12 +56,18 @@ func (th *tcpHandler) HandlePacket(process *gen.TCPHandlerProcess, packet []byte
 			ConnConfig:  nil,
 		}
 		err := device.Auth(global.Config.Mqtt.Addr)
-		log.Info(err)
 		if err != nil {
 			conn.Socket.Write([]byte("MQTT:" + err.Error()))
 			return 0, 0, gen.TCPHandlerStatusClose
 		}
+		config, err := rpc.GetDeviceBufferConfig(device.AccessToken)
+		log.Info(err)
+		if err != nil {
+			conn.Socket.Write([]byte("RPC:" + err.Error()))
+			return 0, 0, gen.TCPHandlerStatusClose
+		}
 
+		device.DeviceType = config.DeviceType
 		device.Online = true
 		global.Devices[string(p.Payload)] = device
 		th.onlineDevice[conn.Addr.String()] = device
@@ -72,7 +79,15 @@ func (th *tcpHandler) HandlePacket(process *gen.TCPHandlerProcess, packet []byte
 			conn.Socket.Write([]byte("MQTT: device auth failed"))
 			return 0, 0, gen.TCPHandlerStatusClose
 		}
-		device.Publish(string(p.Payload))
+
+		var topic string
+		if device.DeviceType == "1" {
+			topic = global.Config.Topic.PublishRawData
+		} else {
+			topic = global.Config.Topic.GatewayPublishRawData
+		}
+		log.Info(topic, ":", string(p.Payload))
+		device.Publish(topic, string(p.Payload))
 	case 0x2:
 		// TODO publish events
 	}

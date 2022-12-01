@@ -38,8 +38,8 @@ func (d *Device) Auth(server string) error {
 	return nil
 }
 
-func (d *Device) Publish(payload interface{}) error {
-	token := d.Conn.Publish("device/attributes", 1, false, payload)
+func (d *Device) Publish(topic string, payload interface{}) error {
+	token := d.Conn.Publish(topic, 0, false, payload)
 	if token.Wait(); token.Error() != nil {
 		d.Online = false
 		return token.Error()

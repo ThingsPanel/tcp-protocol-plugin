@@ -33,7 +33,7 @@ func main() {
 		//// payload
 		//data = append(data, []byte(accessToken)...)
 		if !isAuthed {
-			packet := model.BuildAuthPacket("2072aae3-596c-3977-4a14-b127dcef41e0")
+			packet := model.BuildAuthPacket("b79f6640-8c11-b7ca-608a-f943bb1e2183")
 			data := packet.Serialize()
 
 			fmt.Println(string(data))
