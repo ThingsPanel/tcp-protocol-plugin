@@ -2,10 +2,11 @@ package conf
 
 import (
 	_ "embed"
+
 	"gopkg.in/yaml.v3"
 )
 
-//go:embed config.yaml
+// go:embed config.yaml
 var configYaml string
 
 type Config struct {
