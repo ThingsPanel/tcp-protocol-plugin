@@ -49,7 +49,7 @@ This plugin allows you to connect to a TCP server and forward data to thingsPane
   ```
 ## Installation
 ```bash
-git clone https://github.com/sllt/tp-tcp-plugin.git
+git clone https://github.com/ThingsPanel/tcp-protocol-plugin.git
 
 mv conf/config.example.yaml conf/config.yaml
 
