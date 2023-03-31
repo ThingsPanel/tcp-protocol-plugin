@@ -1,8 +1,8 @@
 default:
-  custom_tcp_protocol_addr: ":7654"
-  tcp_protocol_addr: ":7653"
+  custom_tcp_protocol_addr: ":7654" # 自定义tcp协议（透传）
+  tcp_protocol_addr: ":7653" # 官方tcp协议
   mqtt:
-    addr: "dev.thingspanel.cn:1883"
+    addr: "127.0.0.1:1883"
     username: "root"
     password: "root"
     qos: 0
@@ -13,9 +13,10 @@ default:
     subscribe_raw_data: "plugin/tcp/#"
     gateway_publish_raw_data: "gateway/attributes"
   api:
-    custom_addr: "0.0.0.0:8000"
-    self_addr: "localhost:8089"
-
+    custom_addr: "0.0.0.0:8000" # 提供给thingspanel-go的http服务
+    self_addr: "localhost:8089" # 提供给thingspanel-go的http服务
+  tp:
+    http_addr: "http://127.0.0.1:9999" # 连接thingspanel-go,docker
 production:
   custom_tcp_protocol_addr: "example.com:7654"
   tcp_protocol_addr: "example.com:7653"

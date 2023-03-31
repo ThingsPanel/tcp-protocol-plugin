@@ -29,6 +29,9 @@ type Config struct {
 		CustomAddr string `yaml:"custom_addr"`
 		SelfAddr   string `yaml:"self_addr"`
 	} `yaml:"api"`
+	Tp struct {
+		HttpAddr string `yaml:"http_addr"`
+	} `yaml:"tp"`
 }
 
 func LoadConfig(key string) (*Config, error) {

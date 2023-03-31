@@ -2,15 +2,17 @@ package rpc
 
 import (
 	"errors"
+	"strings"
+
 	"github.com/go-resty/resty/v2"
+	global "github.com/sllt/tp-tcp-plugin/global"
 	"github.com/sllt/tp-tcp-plugin/model"
 	"github.com/sllt/tp-tcp-plugin/pkg/rpc/req"
 	"github.com/sllt/tp-tcp-plugin/pkg/rpc/resp"
-	"strings"
 )
 
 var (
-	URL    = "http://dev.thingspanel.cn:9999"
+	URL    = global.Config.Tp.HttpAddr
 	client = resty.New()
 )
 
